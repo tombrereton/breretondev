@@ -51,10 +51,14 @@ const { title } = Astro.props;
     @apply bg-repeat;
     @apply bg-1rem;
     @apply text-grey-light;
-    @apply flex-1;
+    @apply flex;
+    @apply flex-col;
   }
   .tb-body {
-    @apply flex-1;
+    @apply flex;
+    @apply flex-col;
     @apply p-10;
+    @apply items-center;
+		@apply gap-y-36;
   }
 </style>

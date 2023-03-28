@@ -1,0 +1,32 @@
+---
+import TextSmallHeading from "./TextSmallHeading.astro";
+import SmallIcon from "./SmallIcon.astro";
+
+interface Props {
+  url: string;
+  text: string;
+}
+
+const { url, text } = Astro.props;
+---
+
+<a href={url} class="tb-button">
+  <TextSmallHeading>
+    {text}
+  </TextSmallHeading>
+  <SmallIcon />
+</a>
+
+<style>
+  .tb-button {
+    @apply flex;
+    @apply justify-center;
+    @apply items-center;
+    @apply bg-black;
+    @apply border;
+    @apply border-black-light;
+    @apply py-5;
+    @apply gap-x-1;
+    @apply w-56;
+  }
+</style>
