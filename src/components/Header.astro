@@ -1,9 +1,27 @@
 ---
 import TextBody from "./TextBody.astro";
 import logo from "../assets/imgs/logo.svg";
+import LogoLight from "./LogoLight.astro";
 ---
 
-<nav>
-  <img src={logo.src} alt="Logo" />
-  <TextBody>home</TextBody>
+<nav class="nav-header">
+  <img src={logo.src} width="80px" alt="Logo" />
+  <div class="flex space-x-4">
+    <TextBody>home</TextBody>
+    <TextBody>projects</TextBody>
+    <TextBody>blog</TextBody>
+  </div>
 </nav>
+
+<style>
+  .nav-header {
+    @apply bg-black border;
+    @apply border-black-light;
+    @apply border-solid;
+    @apply flex;
+    @apply justify-between;
+    @apply items-center;
+		@apply px-8;
+		@apply py-4;
+  }
+</style>
