@@ -7,12 +7,12 @@ interface Props {
 const { url, text } = Astro.props;
 ---
 
-<a class="anc" href={url}>
+<a class="tb-link" href={url}>
   {text}
 </a>
 
 <style>
-  .anc {
+  .tb-link {
     @apply font-sans;
     @apply text-grey-light;
   }

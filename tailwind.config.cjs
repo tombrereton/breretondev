@@ -12,7 +12,7 @@ module.exports = {
         "1rem": "2rem",
       },
       fontFamily: {
-        sans: ["Catamaran", ],
+        sans: ["Catamaran"],
         body: ["Overpass", ...defaultTheme.fontFamily.sans],
         serif: ["Lora", ...defaultTheme.fontFamily.serif],
         mono: ["PT Mono", ...defaultTheme.fontFamily.mono],
@@ -24,6 +24,8 @@ module.exports = {
         grey: "#8A8A8A",
         "grey-light": "#9A9A9A",
         "grey-dark": "#585858",
+        "grey-other": "#515151",
+        white: "#E9E9E9",
       },
     },
   },

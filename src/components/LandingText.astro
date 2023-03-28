@@ -1,0 +1,34 @@
+<div class="tb-landing">
+  <h1 class="tb-title tb-gradient">Tom Brereton</h1>
+  <h2 class="tb-gradient tb-subtitle">Tinkerer, Creator, Software Engineer</h2>
+</div>
+
+<style>
+  .tb-landing {
+    @apply flex;
+    @apply flex-col;
+    @apply items-center;
+		@apply mt-10;
+  }
+  .tb-gradient {
+    @apply text-transparent;
+    @apply bg-clip-text;
+    @apply bg-gradient-to-r;
+    @apply from-white;
+    @apply to-grey-other;
+  }
+
+  .tb-title {
+    @apply font-sans;
+    @apply text-5xl;
+    @apply p-1;
+  }
+
+  .tb-subtitle {
+    @apply font-serif;
+    @apply text-3xl;
+    @apply italic;
+    @apply text-center;
+    @apply p-1;
+  }
+</style>
