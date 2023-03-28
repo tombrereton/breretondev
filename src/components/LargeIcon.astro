@@ -1,11 +1,19 @@
 ---
 import { Icon } from "astro-icon";
+import TextSmallHeading from "./TextSmallHeading.astro";
+import TextBody from "./TextBody.astro";
 
 interface Props {
   icon: string;
+  text: string;
 }
 
-const { icon } = Astro.props;
+const { icon, text } = Astro.props;
 ---
 
-<Icon name={icon} class="text-grey-light h-10 mr-10" />
+<div class="flex items-center justify-center mr-16 md:mr-24 lg:mr-40">
+  <Icon name={icon} class="text-grey-light h-10 lg:mr-2" />
+  <div class="hidden lg:flex lg:items-center">
+    <TextBody>{text}</TextBody>
+  </div>
+</div>
