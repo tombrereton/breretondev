@@ -1,6 +1,14 @@
+---
+interface Props {
+  title: string;
+  subtitle: string;
+}
+const { title, subtitle } = Astro.props;
+---
+
 <div class="tb-landing">
-  <h1 class="tb-title tb-gradient">Tom Brereton</h1>
-  <h2 class="tb-gradient tb-subtitle">Tinkerer, Creator, Software Engineer</h2>
+  <h1 class="tb-title tb-gradient">{title}</h1>
+  <h2 class="tb-gradient tb-subtitle">{subtitle}</h2>
 </div>
 
 <style>
@@ -8,7 +16,7 @@
     @apply flex;
     @apply flex-col;
     @apply items-center;
-		@apply mt-10;
+    @apply mt-10;
   }
   .tb-gradient {
     @apply text-transparent;
