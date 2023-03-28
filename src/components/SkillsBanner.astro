@@ -1,0 +1,45 @@
+---
+import TextSmallHeading from "./TextSmallHeading.astro";
+import LargeIcon from "./LargeIcon.astro";
+---
+
+<div class="tb-marquee">
+  <div class="tb-banner animate-marquee">
+    <LargeIcon icon="simple-icons:figma" />
+    <LargeIcon icon="simple-icons:postgresql" />
+    <LargeIcon icon="simple-icons:python" />
+    <LargeIcon icon="simple-icons:dotnet" />
+    <LargeIcon icon="simple-icons:microsoftazure" />
+    <LargeIcon icon="simple-icons:react" />
+    <LargeIcon icon="simple-icons:javascript" />
+  </div>
+  <div class="tb-banner absolute animate-marquee2 top-0 left-8">
+    <LargeIcon icon="simple-icons:figma" />
+    <LargeIcon icon="simple-icons:postgresql" />
+    <LargeIcon icon="simple-icons:python" />
+    <LargeIcon icon="simple-icons:dotnet" />
+    <LargeIcon icon="simple-icons:microsoftazure" />
+    <LargeIcon icon="simple-icons:react" />
+    <LargeIcon icon="simple-icons:javascript" />
+  </div>
+</div>
+
+<style>
+  .tb-marquee {
+    @apply w-screen;
+    @apply bg-black;
+    @apply border;
+    @apply border-black-light;
+    @apply overflow-x-hidden;
+    @apply relative;
+    @apply flex;
+  }
+  .tb-banner {
+    @apply flex;
+    @apply whitespace-nowrap;
+    @apply justify-center;
+    @apply items-center;
+    @apply py-8;
+    @apply gap-x-8;
+  }
+</style>

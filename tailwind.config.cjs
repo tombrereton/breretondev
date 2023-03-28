@@ -17,6 +17,20 @@ module.exports = {
         serif: ["Lora", ...defaultTheme.fontFamily.serif],
         mono: ["PT Mono", ...defaultTheme.fontFamily.mono],
       },
+      animation: {
+        marquee: "marquee 25s linear infinite",
+        marquee2: "marquee2 25s linear infinite",
+      },
+      keyframes: {
+        marquee: {
+          "0%": { transform: "translateX(0%)" },
+          "100%": { transform: "translateX(-100%)" },
+        },
+        marquee2: {
+          "0%": { transform: "translateX(100%)" },
+          "100%": { transform: "translateX(0%)" },
+        },
+      },
       colors: {
         "black-dark": "#161616",
         black: "#1A1A1A",
