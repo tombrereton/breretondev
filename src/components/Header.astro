@@ -1,15 +1,16 @@
 ---
-import TextBody from "./TextBody.astro";
-import logo from "../assets/imgs/logo.svg";
-import LogoLight from "./LogoLight.astro";
+import logo from "../assets/imgs/logo.png";
+import TextLink from "./TextLink.astro";
+import { Icon } from "astro-icon";
 ---
 
 <nav class="nav-header">
-  <img src={logo.src} width="80px" alt="Logo" />
-  <div class="flex space-x-4">
-    <TextBody>home</TextBody>
-    <TextBody>projects</TextBody>
-    <TextBody>blog</TextBody>
+  <img src={logo.src} width="60px" alt="Logo" />
+  <div class="flex space-x-5">
+    <TextLink text="home" url="/" />
+    <TextLink text="projects" url="/projects" />
+    <TextLink text="blog" url="/blog" />
+    <Icon name="mdi:search" class="text-grey-light w-6" />
   </div>
 </nav>
 
@@ -21,7 +22,7 @@ import LogoLight from "./LogoLight.astro";
     @apply flex;
     @apply justify-between;
     @apply items-center;
-		@apply px-8;
-		@apply py-4;
+    @apply px-4;
+    @apply py-4;
   }
 </style>

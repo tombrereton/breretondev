@@ -1,0 +1,19 @@
+---
+interface Props {
+  url: string;
+  text: string;
+}
+
+const { url, text } = Astro.props;
+---
+
+<a class="anc" href={url}>
+  {text}
+</a>
+
+<style>
+  .anc {
+    @apply font-sans;
+    @apply text-grey-light;
+  }
+</style>
