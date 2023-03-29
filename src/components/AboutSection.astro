@@ -3,6 +3,8 @@ import TextTitle from "./TextTitle.astro";
 import Card from "./Card.astro";
 import TextBody from "./TextBody.astro";
 import portrait from "../assets/imgs/portrait.png";
+import SmallIcon from "./SmallIcon.astro";
+import TinyIcon from "./TinyIcon.astro";
 ---
 
 <div class="flex flex-col items-center">
@@ -11,10 +13,10 @@ import portrait from "../assets/imgs/portrait.png";
     <img src={portrait.src} class="rounded-full w-8/12" />
     <TextBody>
       Hey there! I'm Tom, a software engineer who's all about technology and
-      design. I'm into software architecture, designing for testability,
-      and building captivating websites that bring ideas to life. In my free
-      time, I love practicing Muay Thai, exploring the outdoors while camping, working out at the gym, or
-      getting crafty with design.
+      design. I'm into software architecture, designing for testability, and
+      building captivating websites that bring ideas to life. In my free time, I
+      love practicing Muay Thai, exploring the outdoors while camping, working
+      out at the gym, or getting crafty with design.
     </TextBody>
     <TextBody>
       I'm currently based in Sydney as a Lead Software Engineer at <a
@@ -22,5 +24,13 @@ import portrait from "../assets/imgs/portrait.png";
         class="underline underline-offset-2">Azenix</a
       >.
     </TextBody>
+    <div class="flex justify-between w-full">
+      <TinyIcon icon="mdi:music" />
+      <TinyIcon icon="mdi:karate" />
+      <TinyIcon icon="mdi:laptop" />
+      <TinyIcon icon="mdi:dumbbell" />
+      <TinyIcon icon="mdi:tent" />
+      <TinyIcon icon="mdi:pencil-ruler" />
+    </div>
   </Card>
 </div>
