@@ -1,5 +1,11 @@
 ---
 import { Icon } from "astro-icon";
+
+interface Props {
+  icon: string;
+}
+
+const { icon } = Astro.props;
 ---
 
-<Icon name="ph:link" class="text-grey-light h-6" />
+<Icon name={icon} class="text-grey-light h-6" />
