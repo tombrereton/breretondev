@@ -1,14 +1,17 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import TextTitle from "../components/TextTitle.astro";
-import TextSubtitle from "../components/TextSubtitle.astro";
 import TextPageTitle from "../components/TextPageTitle.astro";
 import Button from "../components/Button.astro";
 import SkillsBanner from "../components/SkillsBanner.astro";
+import SectionAbout from "../components/SectionAbout.astro";
 ---
 
 <Layout title="Tom Brereton | Software Engineer">
-  <TextPageTitle title="Tom Brereton" subtitle="Tinkerer, Creator, Software Engineer" />
+  <TextPageTitle
+    title="Tom Brereton"
+    subtitle="Tinkerer, Creator, Software Engineer"
+  />
   <Button text="My Projects" url="/projects" />
   <SkillsBanner />
+  <SectionAbout />
 </Layout>
