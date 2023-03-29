@@ -1,0 +1,48 @@
+---
+import logo from "../assets/imgs/logo.png";
+import TextLink from "./TextLink.astro";
+import { Icon } from "astro-icon";
+import TinyIcon from "./TinyIcon.astro";
+---
+
+<nav class="tb-footer mt-32 flex flex-col justify-start">
+  <a href="/">
+    <img src={logo.src} width="60px" alt="Logo" class="mb-8" />
+  </a>
+  <div class="flex justify-between w-full">
+    <div class="flex flex-col gap-x-5">
+      <TextLink text="home" url="/" />
+      <TextLink text="projects" url="/projects" />
+      <TextLink text="blog" url="/blog" />
+      <TextLink text="search" url="/search" />
+    </div>
+    <div class="flex flex-col gap-5 justify-center">
+      <div class="flex gap-5">
+        <a href="https://ko-fi.com/tombrereton">
+          <TinyIcon icon="ph:coffee-thin" />
+        </a>
+        <a href="https://www.linkedin.com/in/tbrereton/">
+          <TinyIcon icon="ph:linkedin-logo-thin" />
+        </a>
+      </div>
+      <div class="flex gap-5 justify-center">
+        <a href="https://github.com/tombrereton">
+          <TinyIcon icon="ph:github-logo-thin" />
+        </a>
+        <a href="mailto:tom@brereton.dev">
+          <TinyIcon icon="ph:envelope-simple-thin" />
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<style>
+  .tb-footer {
+    @apply bg-black border;
+    @apply border-black-light;
+    @apply border-solid;
+    @apply flex;
+    @apply p-8;
+  }
+</style>
