@@ -1,0 +1,29 @@
+---
+import Layout from "../layouts/Layout.astro";
+import TextTitle from "../components/TextTitle.astro";
+
+import { getCollection } from "astro:content";
+
+const posts = await getCollection("blog", (post) => {
+  return import.meta.env.MODE !== "production" || post.data.draft === false;
+});
+---
+
+<Layout title="Tom Brereton | Software Engineer | Search">
+  <TextTitle>Search</TextTitle>
+  {
+    posts.map((post) => {
+      return (
+        <article>
+          <h2>
+            <a href={`/blog/${post.slug}`}>{post.data.share.title}</a>
+          </h2>
+          <p>{post.data.share.description}</p>
+          <p>
+            <a href={`/blog/${post.slug}`}>full post &rarr;</a>
+          </p>
+        </article>
+      );
+    })
+  }
+</Layout>
