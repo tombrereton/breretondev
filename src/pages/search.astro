@@ -1,7 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import TextTitle from "../components/TextTitle.astro";
-
 import { getCollection } from "astro:content";
 
 const posts = await getCollection("blog", (post) => {
