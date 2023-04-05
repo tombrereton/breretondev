@@ -15,9 +15,9 @@ const posts = await getCollection("blog", (post) => {
       return (
         <article>
           <h2>
-            <a href={`/blog/${post.slug}`}>{post.data.share.title}</a>
+            <a href={`/blog/${post.slug}`}>{post.data.title}</a>
           </h2>
-          <p>{post.data.share.description}</p>
+          <p>{post.data.summary}</p>
           <p>
             <a href={`/blog/${post.slug}`}>full post &rarr;</a>
           </p>
