@@ -1,5 +1,5 @@
 import Fuse from "fuse.js";
-import type { Document } from "../content/schemas/documentSchema";
+import type { Document } from "../content/schemas/_document";
 
 export default class DocumentRepository {
   private fuse: Fuse<Document>;
