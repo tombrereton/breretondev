@@ -1,8 +1,8 @@
 import { expect, test } from "vitest";
 import { faker } from "@faker-js/faker";
 import * as Factory from "factory.ts";
-import type { Document } from "../../src/content/schemas/_document";
-import DocumentRepository from "../../src/functions/documentRepository";
+import type { Document } from "@/content/schemas/_document";
+import DocumentRepository from "@/functions/documentRepository";
 
 const docFactory = Factory.Sync.makeFactory<Document>({
   category: "post",
