@@ -5,6 +5,7 @@ import path from "path";
 export default getViteConfig({
   test: {
     environment: "jsdom",
+		globals: true
   },
   resolve: {
     alias: {
