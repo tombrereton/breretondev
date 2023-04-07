@@ -5,6 +5,7 @@ export const documentSchema = z.object({
   dateCreated: z.date().transform((str) => new Date(str)),
   dateLastModified: z.date().transform((str) => new Date(str)),
   title: z.string(),
+  slugLink: z.string().trim(),
   summary: z.string(),
   pic: z.string().url(),
   category: z.enum(["post", "project"]),
