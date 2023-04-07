@@ -2,15 +2,23 @@ import { expect, test } from "vitest";
 import "@testing-library/jest-dom";
 import Search from "@/components/Search";
 import { render, screen, fireEvent } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { DocumentFactory } from "tests/helpers/DocumentFactory";
-import React, { Component } from "react";
 
-// write test for search react component
-test("should render search component", () => {
+test("should render textbox", () => {
   const docs = DocumentFactory.buildList(10);
 
-  render(<Search documents={docs} />);
-  const input = screen.getByRole("input");
+  const html = render(<Search documents={docs} />);
+  const input = html.getByRole("textbox");
   expect(input).toBeInTheDocument();
-  // const input = screen.getByLabelText("document-search-input");
+});
+
+test("should show input text", async () => {
+  const docs = DocumentFactory.buildList(10);
+  const user = userEvent.setup();
+
+  const html = render(<Search documents={docs} />);
+  const input = html.getByRole("textbox");
+	await userEvent.type(input, "test");
+  expect(input).toHaveValue("test");
 });
