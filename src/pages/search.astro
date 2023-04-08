@@ -4,6 +4,7 @@ import TextTitle from "../components/TextTitle.astro";
 import { getCollection } from "astro:content";
 import Search from "@/components/Search";
 import SearchResults from "@/components/SearchResults";
+import TextBody from "@/components/TextBody.astro";
 
 const posts = await getCollection("blog", (post) => {
   return import.meta.env.MODE !== "production" || post.data.draft === false;
@@ -13,23 +14,9 @@ const postsData = posts.map((p) => p.data);
 ---
 
 <Layout title="Tom Brereton | Software Engineer | Search">
-  <TextTitle>Search</TextTitle>
-  <Search documents={postsData} />
-  <SearchResults documents={postsData} />
-
-  <!-- {
-    posts.map((post) => {
-      return (
-        <article>
-          <h2>
-            <a href={`/blog/${post.slug}`}>{post.data.title}</a>
-          </h2>
-          <p>{post.data.summary}</p>
-          <p>
-            <a href={`/blog/${post.slug}`}>full post &rarr;</a>
-          </p>
-        </article>
-      );
-    })
-  } -->
+  <div class="flex w-full flex-col">
+    <TextBody>home > search</TextBody>
+    <TextTitle>Search</TextTitle>
+    <SearchResults client:load documents={postsData} />
+  </div>
 </Layout>

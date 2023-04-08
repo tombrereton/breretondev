@@ -4,8 +4,11 @@ import type { Document } from "../content/schemas/_document";
 export default class DocumentRepository {
   private fuse: Fuse<Document>;
 
-  constructor(private documents: Document[], private options: any) {
-    this.fuse = new Fuse(this.documents, options);
+  constructor(
+    private documents: Document[],
+    private options: Fuse.IFuseOptions<Document>
+  ) {
+    this.fuse = new Fuse(this.documents, this.options);
   }
 
   search(query: string): Document[] {
