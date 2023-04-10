@@ -5,18 +5,22 @@ import { getCollection } from "astro:content";
 import Search from "@/components/Search";
 import SearchResults from "@/components/SearchResults";
 import TextBody from "@/components/TextBody.astro";
+import type { Document } from "@/content/schemas/_document";
 
-const posts = await getCollection("blog", (post) => {
-  return import.meta.env.MODE !== "production" || post.data.draft === false;
-});
+// const posts = await getCollection("blog", (post) => {
+//   return import.meta.env.MODE !== "production" || post.data.draft === false;
+// });
 
-const postsData = posts.map((p) => p.data);
+// const postsData = posts.map((p) => p.data);
+const allPosts = await Astro.glob('../posts/*.{md,mdx}');
+const posts = allPosts.filter((post) => !post.frontmatter.draft && post.frontmatter.slug).map(p => p as Document);
+
 ---
 
 <Layout title="Tom Brereton | Software Engineer | Search">
   <div class="flex w-full flex-col">
     <TextBody>home > search</TextBody>
     <TextTitle>Search</TextTitle>
-    <SearchResults client:load documents={postsData} />
+    <SearchResults client:load documents={posts} />
   </div>
 </Layout>
