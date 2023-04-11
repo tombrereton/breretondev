@@ -9,7 +9,8 @@ type Props = {
 };
 
 let config: Fuse.IFuseOptions<Document> = {
-  keys: ["title", "tags", "summary"],
+  keys: ["title", "tags", "summary", "category"],
+  useExtendedSearch: true
 };
 
 export default function SearchResults({ documents }: Props): JSX.Element {
