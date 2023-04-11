@@ -12,9 +12,6 @@ const postsData = await getCollection("blog", (post) => {
 });
 
 const posts = postsData.map((p) => p.data);
-// const allPosts = await Astro.glob('../content/blog/*.{md,mdx}');
-// const posts = allPosts.filter((post) => !post.frontmatter.draft && post.frontmatter.slug).map(p => p as Document);
-
 ---
 
 <Layout title="Tom Brereton | Software Engineer | Search">

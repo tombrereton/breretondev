@@ -7,7 +7,7 @@ export const documentSchema = z.object({
   title: z.string(),
   slugLink: z.string().trim(),
   summary: z.string(),
-  pic: z.string().url(),
+  pic: z.string(),
   category: z.enum(["post", "project"]),
   tags: z.array(z.string()),
 });
