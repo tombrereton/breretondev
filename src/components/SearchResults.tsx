@@ -3,6 +3,7 @@ import type Fuse from "fuse.js";
 import DocumentRepository from "@/functions/DocumentRepository";
 import { useEffect, useState } from "react";
 import ResultCard from "./ResultCard";
+import { SearchInput } from "./SearchInput";
 
 type Props = {
   documents: Document[];
@@ -13,11 +14,22 @@ let config: Fuse.IFuseOptions<Document> = {
   useExtendedSearch: true,
 };
 
+const searchPromptText = (
+  <div>
+    <h2
+      id="search-prompt"
+      className="font-serif text-3xl italic text-center mt-12 m-3 text-grey-dark"
+    >
+      Try searching for tags, posts, or projects.
+    </h2>
+  </div>
+);
+
 export default function SearchResults({ documents }: Props): JSX.Element {
   const [query, setQuery] = useState("");
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search); // id=123
+    const params = new URLSearchParams(window.location.search); 
     const queryFromParams = params.get("q");
     setQuery(queryFromParams || "");
   }, []);
@@ -32,25 +44,8 @@ export default function SearchResults({ documents }: Props): JSX.Element {
 
   return (
     <div className="flex flex-col w-full">
-      <input
-        className="bg-black border border-black-light rounded p-2 mt-5 mb-10 placeholder-grey-dark text-grey-light focus:border-grey focus:outline-none focus:rounded"
-        type="text"
-        name="search"
-        onChange={handleText}
-        placeholder="Search for anything"
-        value={query}
-        aria-label="document-search-input"
-      />
-      {results.length === 0 && (
-        <div>
-          <h2
-            id="search-prompt"
-            className="font-serif text-3xl italic text-center mt-12 m-3 text-grey-dark"
-          >
-            Try searching for tags, posts, or projects.
-          </h2>
-        </div>
-      )}
+      {SearchInput(handleText, query)}
+      {results.length === 0 && searchPromptText}
       <div role="listbox" className="flex flex-col gap-5 h-full">
         {results.map((post) => {
           return ResultCard(post);
