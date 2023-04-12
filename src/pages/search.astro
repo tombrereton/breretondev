@@ -1,0 +1,31 @@
+---
+import Layout from "../layouts/Layout.astro";
+import TextTitle from "../components/TextTitle.astro";
+import { getCollection } from "astro:content";
+import Search from "@/components/Search";
+import SearchResults from "@/components/SearchResults";
+import TextBody from "@/components/TextBody.astro";
+import type { Document } from "@/content/schemas/_document";
+
+const postsData = await getCollection("blog", (post) => {
+  return import.meta.env.MODE !== "production" || post.data.draft === false;
+});
+
+const posts = postsData.map((p) => p.data);
+---
+
+<Layout title="Tom Brereton | Software Engineer | Search">
+  <div class="flex w-full flex-col">
+    <div class="flex gap-1 mb-1">
+      <a href="/">
+        <span class="text-grey-dark">home</span>
+      </a>
+      <span class="text-grey-dark">{">"}</span>
+      <a>
+        <span class="text-grey-dark">search</span>
+      </a>
+    </div>
+    <TextTitle>Search</TextTitle>
+    <SearchResults client:only documents={posts} />
+  </div>
+</Layout>
