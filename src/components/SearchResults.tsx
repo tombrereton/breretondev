@@ -45,9 +45,9 @@ export default function SearchResults({ documents }: Props): JSX.Element {
         <div>
           <h2
             id="search-prompt"
-            className="font-serif text-3xl italic text-center mt-12 m-3 "
+            className="font-serif text-3xl italic text-center mt-12 m-3 text-grey-dark"
           >
-            Search for tags, posts, or projects.
+            Try searching for tags, posts, or projects.
           </h2>
         </div>
       )}

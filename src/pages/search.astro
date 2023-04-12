@@ -16,7 +16,15 @@ const posts = postsData.map((p) => p.data);
 
 <Layout title="Tom Brereton | Software Engineer | Search">
   <div class="flex w-full flex-col">
-    <TextBody>home > search</TextBody>
+    <div class="flex gap-1 mb-1">
+      <a href="/">
+        <span class="text-grey-dark">home</span>
+      </a>
+      <span class="text-grey-dark">{">"}</span>
+      <a>
+        <span class="text-grey-dark">search</span>
+      </a>
+    </div>
     <TextTitle>Search</TextTitle>
     <SearchResults client:only documents={posts} />
   </div>
