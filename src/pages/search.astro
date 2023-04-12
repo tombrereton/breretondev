@@ -18,6 +18,6 @@ const posts = postsData.map((p) => p.data);
   <div class="flex w-full flex-col">
     <TextBody>home > search</TextBody>
     <TextTitle>Search</TextTitle>
-    <SearchResults client:load documents={posts} />
+    <SearchResults client:only documents={posts} />
   </div>
 </Layout>
