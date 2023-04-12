@@ -19,6 +19,7 @@
     "@fontsource/lora": "^4.5.13",
     "@fontsource/overpass": "^4.5.11",
     "@fontsource/pt-mono": "^4.5.11",
+    "@phosphor-icons/react": "^2.0.8",
     "@types/react": "^18.0.33",
     "@types/react-dom": "^18.0.11",
     "astro": "^2.1.7",
