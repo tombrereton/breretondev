@@ -7,6 +7,8 @@ export function SearchInput(handleText: (event: any) => void, query: string) {
       onChange={handleText}
       placeholder="Search for anything"
       value={query}
-      aria-label="document-search-input" />
+      aria-label="document-search-input"
+      autoFocus
+    />
   );
 }
