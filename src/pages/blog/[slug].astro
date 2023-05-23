@@ -1,6 +1,9 @@
 ---
 import { CollectionEntry, getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
+import Card from "../../components/Card.astro";
+import TextPageTitle from "../../components/TextPageTitle.astro";
+import Article from "../../components/Article.astro";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
@@ -27,46 +30,18 @@ const { Content } = await post.render();
 
 <Layout title={`Tom Brereton | $`}>
   <header>
-    <h1>{post.data.title}</h1>
-    <p>{post.data.summary}</p>
+    <TextPageTitle title={post.data.title} subtitle={post.data.summary} />
   </header>
 
-  <Content />
-
-  <footer>
-    <ul class="tags">
-      {post.data.tags?.map((tag) => <li>{tag}</li>)}
-    </ul>
-    <p>
-      <a href="/">&larr; back to all posts</a>
-    </p>
-  </footer>
+  <Article>
+    <article class="prose prose-invert md:prose-lg prose-img:m-auto prose-code:m-auto min-w-full">
+      <Content />
+    </article>
+  </Article>
+  <ul class="tags">
+    {post.data.tags?.map((tag) => <li>{tag}</li>)}
+  </ul>
+  <p>
+    <a href="/">&larr; back to all posts</a>
+  </p>
 </Layout>
-
-<style>
-  header {
-    margin-bottom: 2rem;
-  }
-
-  header p {
-    font-size: 1.125rem;
-  }
-
-  footer {
-    border-top: 1px solid #d8d8d3;
-    margin-top: 2rem;
-  }
-
-  .tags {
-    color: #787873;
-    display: flex;
-    gap: 1rem;
-    list-style: none;
-    margin-bottom: 2rem;
-    padding: 0;
-  }
-
-  .tags li::before {
-    content: "#";
-  }
-</style>
