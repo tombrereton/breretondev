@@ -33,11 +33,11 @@ const { Content } = await post.render();
     <TextPageTitle title={post.data.title} subtitle={post.data.summary} />
   </header>
 
-  <Article>
-    <article class="prose prose-invert md:prose-lg prose-img:m-auto prose-code:m-auto min-w-full">
-      <Content />
-    </article>
-  </Article>
+  <article
+    class="tb-article prose prose-invert md:prose-lg prose-img:m-auto prose-code:m-auto min-w-full"
+  >
+    <Content />
+  </article>
   <ul class="tags">
     {post.data.tags?.map((tag) => <li>{tag}</li>)}
   </ul>
@@ -45,3 +45,15 @@ const { Content } = await post.render();
     <a href="/">&larr; back to all posts</a>
   </p>
 </Layout>
+
+<style>
+  .tb-article {
+    @apply bg-black;
+    @apply border;
+    @apply border-black-light;
+    @apply max-w-full;
+    @apply p-8;
+    @apply md:w-11/12;
+    @apply lg:w-6/12;
+  }
+</style>
