@@ -1,0 +1,138 @@
+---
+draft: false
+
+dateCreated: 2023-03-03
+dateLastModified: 2023-02-14
+title: Working with Aggregates
+slugLink: working-with-aggregates
+pic: ../assets/img/test-circuit.jpg
+summary: A short post on what an aggregate is and how to work with them
+
+category: post
+tags:
+  - aggregates
+  - dotnet
+  - ddd
+---
+
+## What is an aggregate object
+
+What is an aggregate object? It's essentially using Object Oriented Programming (OOP) with the concept of a root object that contains other objects.
+In other words, if you model your domain using plain old csharp objects (POCOs) and relate them to each other in a tree structure, this would be an Aggregate
+and the root of the tree would be the Aggregate Root. Another key point is that an aggregate ensures the business rules are true when modifying data.
+
+For example, if you add a product to an order aggregate object we can check if it's already added and handle it accordingly. To elaborate further, if our requirement
+was to not allow any duplicate products, the Order Aggregate would look like something below.
+
+```csharp
+public class OrderAggregate
+{
+    public Guid Id { get; set; }
+    public List<Product> Products { get; set; }
+    public decimal Total { get; set; }
+
+    public void AddProduct(Product product)
+    {
+        if (Products.Contains(product))
+        {
+            throw new Exception("Product already added");
+        }
+
+        Products.Add(product);
+        Total += product.Price;
+    }
+}
+```
+
+## When to use Aggregates
+
+Here a few scenarios where you might want to use Aggregates:
+
+- To centralise validation of business rules on entities
+- When domain logic is not trivial and requires business rules to be true
+- When updating data that has constraints or business rules that must be true
+
+## Persistence
+
+When peristing Aggregates we have to be careful the business rules don't become corrupted.
+Therefore we want to load the entire Aggregate into memory, make the changes, and then save it back to the datastore.
+This will ensure the business rules are always true as the Aggregate itself, has the validation logic i.e. business rules.
+
+A way to do this is to use the Repository Pattern. However, instead of using a Repository per table, we use a Repository per Aggregate.
+If you use the normal way and create a Repository per table in the datastore, then you will risk conflicting with the invariant rules of the Aggregate.
+This is because it allows tables to be edited independently, which will likely lead corrupting the business rules.
+
+An interesting side note is the use of [Owned Entities](https://learn.microsoft.com/en-us/ef/core/modeling/owned-entities) in EF Core,
+which allow EF core to implement something similar to the aggregate pattern.
+
+A performance benefit to the aggregate pattern is changes are made in memory and it is saved to the datastore as a bulk operation.
+However if there is a lot of data transfered between the application and the datastore, then this should be monitored and optimised if necessary.
+
+For referance, here is an example of a _simple_ Repository for the Order Aggregate.
+
+```csharp
+public interface OrderRepository
+{
+    void Add(OrderAggregate item);
+    OrderAggregate Find(Predicate<T> match);
+    void Remove(OrderAggregate item);
+    void SaveChanges();
+}
+
+```
+
+## Concurrency
+
+Concurrency can be tricky. If we update the Aggregate in 2 separate threads at the same time make break the business rules (i.e. the invariants).
+To prevent this we can use [Optimistic Concurrency](https://learn.microsoft.com/en-us/ef/core/saving/concurrency?tabs=data-annotations) by the way of
+versioning the data in the datastore. Now the application can check against the version to see if any changes were made in the meantime.
+
+There is another option called Pessimistic Concurrency but this locks the data when changes are being made therefore essentially removing concurrency.
+Additionally, it can lead to deadlocks.
+
+## Testing
+
+One question you might ask is if Aggregates need to implement an interface. The answer is no because an Aggregate is an encapulation of
+domain logic and there is only one implementation of it's behaviour. Therefore using an interface is unnecessary abstraction.
+You wouldn't have multiple implementation against that interface or swap it out for something new in the future.
+The Aggregate contains the business rules and the only time it changes is if the requirements are updated.
+
+When it comes to testing, you test directly against the object, no need to think about stubbing or mocking it.
+To make things easier I recommend creating a test helper such as a fluent `Builder` class to make a "default" Aggregate.
+Note this `Builder` class should only live in the Test project unless it make sense to have a default value in the application code.
+
+## Commands vs Queries
+
+Aggregates works really well with CQRS but you should only use aggregates on the command side. 
+It's not necessary to worry about the business invariants when querying data as nothing is modified. 
+Additionally you may want to get the data in a slight different shape, order, or filtered. 
+Doing any of these operations on the aggregate is tedious and not really efficient as sorting and filtering 
+has been moved in memory rather than taking advantage of the database power.
+
+So for queries just stick with simplicity. If it's a SQL database, I suggest something like Dappper and use raw SQL. 
+In .NET 7, linq may also be a good option as there have been some performance improvements.
+
+For commands, we use the aggregates as normal as we are modifying data and therefore need to check the business invariants are still true.
+
+## Developing with Aggregates
+
+My preferred approach as a solo developer:
+
+- Start with a usecase (feature)
+- Use ATDD to build out feature
+- During the refactoring process, look for opportunities to introduce an Aggregate
+
+My preferred approach when working in a team:
+
+- As a team activity, model the business process with Event Storming
+- From Event Storming identity the use cases, entities, and aggregates
+- Build stories which are split by use cases and take care around working on the same aggregate
+
+# References
+
+- https://stackoverflow.com/questions/1958621/whats-an-aggregate-root
+- [Aggregates](https://lostechies.com/jimmybogard/2010/02/24/strengthening-your-domain-aggregate-construction/)
+- [Infrastructure Design](https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-design)
+- [Concurrency and Aggregates](http://www.kamilgrzybek.com/design/handling-concurrency-aggregate-pattern-and-ef-core/)
+- [Handling Concurrency Conflicts](https://learn.microsoft.com/en-us/ef/core/saving/concurrency?tabs=data-annotations)
+- [Optimistic Concurrency with eTags](https://learn.microsoft.com/en-us/ef/core/providers/cosmos/?tabs=dotnet-core-cli)
